@@ -1,23 +1,68 @@
-# Quantum-Secure Chat (Go)
+# Quantum-Secure Chat Go
 
-A high-performance chat infrastructure designed to be resistant against future quantum computing attacks.
+High-performance chat infrastructure resistant against quantum computing attacks.
 
-## 🛡️ Security Architecture
-This project implements hybrid cryptographic schemes combining traditional ECC with **Post-Quantum Cryptography (PQC)**.
+## Features
 
-```mermaid
-graph LR
-    A[Client A] -- PQC KEM Handshake --> B[Server]
-    B -- Shared Secret Established --> C[Client B]
-    A -- AES-GCM 256 --> C
+- **Post-Quantum Cryptography**: Lattice-based KEM integration
+- **Perfect Forward Secrecy**: Ephemeral per-session keys
+- **Hybrid Encryption**: ECC + PQC combined security
+- **High Concurrency**: Goroutine-per-client model
+- **Scalable Architecture**: Horizontal scaling support
+
+## Architecture
+
+```
+quantum-secure-chat-go/
+├── cmd/              # Server and client applications
+├── internal/         # Internal packages
+├── pkg/
+│   ├── crypto/       # Cryptographic implementations
+│   ├── kem/          # Key encapsulation mechanisms
+│   └── chat/         # Chat protocol
+├── README.md         # This file
+└── .github/
+    └── workflows/
+        └── ci.yml   # CI/CD pipeline
 ```
 
-## 🚀 Features
-- **PQ Resistance**: Integration of lattice-based cryptography concepts.
-- **Perfect Forward Secrecy**: Per-session ephemeral keys.
-- **Scalability**: Goroutine-per-client model for high concurrency.
+## Usage
 
-## 🛠️ Usage
+### Build
+
 ```bash
-go run cmd/server/main.go
+go build -o server ./cmd/server
+go build -o client ./cmd/client
 ```
+
+### Run Server
+
+```bash
+./server
+```
+
+### Run Client
+
+```bash
+./client
+```
+
+## Security
+
+This implementation uses hybrid cryptography:
+- **Traditional ECC**: X25519 key exchange
+- **Post-Quantum**: Lattice-based KEM (simulated)
+- **Symmetric**: AES-256-GCM encryption
+
+## Requirements
+
+- Go 1.21+
+- Cryptographic libraries
+
+## Disclaimer
+
+**Educational Use Only**: This tool is for security learning and authorized testing only.
+
+## License
+
+MIT
